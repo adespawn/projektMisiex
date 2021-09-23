@@ -38,7 +38,7 @@ void THROW(string err, int sev = 0)
 
 struct NUM
 {
-    long long v;
+    unsigned long long v;
     NUM operator+(const NUM b) const
     {
         NUM ret;
@@ -360,6 +360,9 @@ NUM exprHandler::parse64ToNum(string *base64, int *it)
     {
         THROW("parse64ToNum: provided empty string", 1);
     }
+    if(base64->at(*it)=='$'){
+        (*it)++;
+    }
     NUM ret;
     NUM len = parseCharToBase(base64->at(*it), getNum(64));
     if (base64->length() - *it < len.v + 1)
@@ -540,7 +543,7 @@ void INS::runCMD(PROG *mainPROG)
     }
     else if (CMD == "?P")
     {
-        NUM num = mainPROG->data.getVar(mainPROG->handler.readVarName(&argv[0], &pos));
+        NUM num = mainPROG->handler.parseExpr(&argv[0], &pos,0);
         cout << num.toBase(64) << '\n';
     }
     else if (CMD == "?C")
