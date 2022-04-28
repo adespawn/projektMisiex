@@ -103,7 +103,8 @@ insReturn instruction::runIns(varRegion *region)
     else if (ins == "?P")
     {
         number num = region->parseExpr(&argv[0], &pos, 0);
-        std::cout << num << '\n';
+        std::string out = num.toBase(64, &(region->baseNum));
+        std::cout << "$" << region->baseNum[out.size()] << out << '\n';
     }
     // Print varriable to output in given base
     else if (ins == "?PB")
