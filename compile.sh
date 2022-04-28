@@ -1,0 +1,1 @@
+g++ ./src/core.cpp ./src/instruction.cpp ./src/number.cpp ./src/runtime.cpp ./src/varRegion.cpp ./src/logger.cpp -g3 -Wall
